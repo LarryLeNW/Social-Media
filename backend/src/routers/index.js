@@ -1,6 +1,8 @@
 import express from "express";
 const Router = express.Router();
 import AuthRouter from "./auth.router.js";
+import UserRouter from "./user.routes.js";
+import MessageRouter from "./message.routes.js";
 import { StatusCodes } from "http-status-codes";
 
 Router.get("/status", (req, res) => {
@@ -10,5 +12,7 @@ Router.get("/status", (req, res) => {
 });
 
 Router.use("/auth", AuthRouter);
+Router.use("/users", UserRouter);
+Router.use("/messages", MessageRouter);
 
 export default Router;

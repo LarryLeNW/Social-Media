@@ -9,13 +9,9 @@ Router.route("/").get((req, res) => {
 });
 
 Router.route("/signup").post(AuthController.signup);
-Router.route("/login").post((req, res) => {
-    console.log(req.body);
-});
+Router.route("/login").post(AuthController.login);
+Router.route("/logout").post(AuthController.logout);
 
-Router.route("/register").post((req, res) => {
-    console.log(req.body);
-});
 Router.route("/getInfo").post((req, res) => {
     console.log(req.body);
 });
