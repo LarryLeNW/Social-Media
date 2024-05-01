@@ -11,17 +11,15 @@ export const signup = async (req, res) => {
     if (password != confirmPassword) {
       return res
         .status(StatusCodes.NOT_ACCEPTABLE)
-        .json("Password don't match !");
+        .json({ error: "Password don't match !" });
     }
     const user = await User.findOne({ username });
 
     if (user) {
       return res
-        .status(StatusCodes.NOT_IMPLEMENTED)
+        .status(StatusCodes.NOT_ACCEPTABLE)
         .json({ error: "Username already exists" });
     }
-
-    console.log("gender" + gender);
 
     const profilePic =
       "https://avatar.iran.liara.run/public/" +
@@ -40,10 +38,10 @@ export const signup = async (req, res) => {
     });
 
     if (newUser) {
-      generateTokenAndSetCookie(user._id, res);
+      await newUser.save();
+      generateTokenAndSetCookie(newUser._id, res);
 
       try {
-        await newUser.save();
         return res.status(StatusCodes.CREATED).json({
           _id: newUser._id,
           fullName: newUser.fullName,

@@ -9,13 +9,8 @@ import { app, server } from "./socket/socket.js";
 import corsOptions from "./config/cors.js";
 const PORT = 8888;
 
-app.use(express.json()); // to parse the incoming requests with JSON payloads (from req.body)
+app.use(express.json());
 app.use(cookieParser());
-
-// const corsOptions = {
-//   origin: "http://localhost:3000", // Thay thế bằng domain của trang web của bạn
-//   credentials: true,
-// };
 
 app.use(cors(corsOptions));
 
@@ -25,7 +20,13 @@ app.get("/", (req, res, next) => {
 
 app.use("/v1", APIv1);
 
-server.listen(PORT, () => {
-  connectToMongoDB();
-  console.log(`Server Running on port ${PORT}`);
-});
+connectToMongoDB()
+  .then(() => console.log("connect to mongodb successfully..."))
+  .then(() =>
+    server.listen(PORT, () => {
+      console.log(`Server Running on port ${PORT}`);
+    })
+  )
+  .catch((err) => {
+    console.log(err);
+  });

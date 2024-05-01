@@ -3,17 +3,13 @@ const Router = express.Router();
 import * as AuthController from "../controller/auth.controller.js";
 
 Router.route("/").get((req, res) => {
-    res.status(StatusCodes.OK).json({
-        message: "Auth router APIs v1 get...",
-    });
+  res.status(StatusCodes.OK).json({
+    message: "Auth router APIs v1 get...",
+  });
 });
 
 Router.route("/signup").post(AuthController.signup);
 Router.route("/login").post(AuthController.login);
-Router.route("/logout").post(AuthController.logout);
-
-Router.route("/getInfo").post((req, res) => {
-    console.log(req.body);
-});
+Router.route("/logout").get(AuthController.logout);
 
 export default Router;
