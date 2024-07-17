@@ -10,7 +10,7 @@ const useSendMessage = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `http://localhost:8888/v1/messages/send/${selectedConversation._id}`,
+        `${process.env.REACT_APP_URI_API}/v1/messages/send/${selectedConversation._id}`,
         {
           method: "POST",
           headers: {

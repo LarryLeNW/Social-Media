@@ -11,7 +11,7 @@ const useGetMessages = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:8888/v1/messages/${selectedConversation._id}`,
+          `${process.env.REACT_APP_URI_API}/v1/messages/${selectedConversation._id}`,
           { credentials: "include" }
         );
         const data = await res.json();

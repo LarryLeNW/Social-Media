@@ -9,7 +9,7 @@ const useGetConversations = () => {
     const getConversations = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:8888/v1/users", {
+        const res = await fetch(`${process.env.REACT_APP_URI_API}/v1/users`, {
           credentials: "include",
         });
         const data = await res.json();
